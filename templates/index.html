@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Blog</title>
+</head>
+<body>
+    <h1>Flask Blog</h1>
+    
+    <h2>Posts</h2>
+    {% for post in posts %}
+        <div>
+            <h3>{{ post.title }}</h3>
+<!-- Display the original image -->
+<img height="200px" src="{{ url_for('uploaded_file', filename=post.image) }}" alt="{{ post.title }}">
+
+<!-- Display the thumbnail -->
+<img height="200px" src="{{ url_for('thumbnail_file', filename=post.image.split('.')[0] + '_thumb.webp') }}" alt="{{ post.title }} Thumbnail">
+
+<!-- Display the Markdown content -->
+<div>
+    <h4>Markdown Content:</h4>
+    <div>
+
+    </div>
+</div>
+
+
+            <!-- Add links for editing and deleting posts -->
+            <p><a href="{{ url_for('edit_post', id=post.id) }}">Edit</a> | <a href="{{ url_for('delete_post', id=post.id) }}">Delete</a></p>
+        </div>
+    {% endfor %}
+
+    <h2>Add a New Post</h2>
+    <a href="{{ url_for('add_post')}}">Add Post</a>
+</body>
+</html>

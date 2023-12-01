@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+</head>
+<body>
+    <h1>Edit Post</h1>
+    
+    <form method="POST" action="{{ url_for('edit_post', id=post.id) }}" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{ post.title }}" required>
+        <br>
+        
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image">
+        <br>
+        
+        <img height="200px" src="{{ url_for('uploaded_file', filename=post.image|basename) }}" alt="{{ post.title }}">
+        <br>
+
+        <label for="markdown_content">Markdown Content:</label>
+        <textarea id="markdown_content" name="markdown_content" rows="5">{{ post.markdown_content }}</textarea>
+        <br>
+
+        <input type="submit" value="Save Changes">
+    </form>
+    
+    <br>
+    <a href="{{ url_for('index') }}">Cancel</a>
+</body>
+</html>
